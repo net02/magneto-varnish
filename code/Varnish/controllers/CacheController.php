@@ -10,16 +10,18 @@ class Magneto_Varnish_CacheController extends Mage_Adminhtml_CacheController {
         // Handle varnish type
         $types = $this->getRequest()->getParam('types');
 
-        if (Mage::app()->useCache('varnish') ) {
-            if( (is_array($types) && in_array('varnish', $types)) || $types="varnish") {
-				$varnishHelper = Mage::helper('varnish'); /* @var $varnishHelper Magneto_Varnish_Helper_Data */
+        if (Mage::app()->useCache('varnish')) {
+
+            if ((is_array($types) && in_array('varnish', $types)) || $types == "varnish") {
+                $varnishHelper = Mage::helper('varnish'); /* @var $varnishHelper Magneto_Varnish_Helper_Data */
                 $errors = $varnishHelper->purgeAll();
                 if (count($errors) > 0) {
-					$this->_getSession()->addError(Mage::helper('adminhtml')->__("Error while purging Varnish cache:<br />" . implode('<br />', $errors)));
+                    $this->_getSession()->addError(Mage::helper('adminhtml')->__("Error while purging Varnish cache:<br />" . implode('<br />', $errors)));
                 } else {
-                	$this->_getSession()->addSuccess(Mage::helper('adminhtml')->__("Varnish cache purged: '/.*' "));
+                    $this->_getSession()->addSuccess(Mage::helper('adminhtml')->__("Varnish cache purged: '/.*' "));
                 }
             }
+
         }
 
         // Allow parrent handle core cache types

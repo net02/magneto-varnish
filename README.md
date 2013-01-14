@@ -31,13 +31,21 @@ sudo mv modman /usr/bin
 <pre><code>
 cd [magento root folder]
 modman init
-modman magneto-varnish clone https://github.com/madalinoprea/magneto-varnish.git
+modman magneto-varnish clone git://github.com/madalinoprea/magneto-varnish.git
 </code></pre>
 
 In case you get an error that git is not found, you'll have to install git and rerun the last command. This can be done like this on Ubuntu:
 `sudo aptitude install git-core`
 
 1. Flush Magento cache to enable the extension
+
+## Uninstall
+Delete project checked under modman folder and clean created symlinks.
+<pre>
+cd [magento root folder]
+rm -rf .modman/magneto-varnish
+modman clean
+</pre>
 
 ## Requirements
 
